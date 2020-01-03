@@ -1,0 +1,98 @@
+﻿@page "/"
+@inject NumberCombinationFactory NumberGenerator
+
+    <div class="container pt-5">
+        <form>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="size">Combination Size</label>
+                    <input type="number" min="1" @bind="Size" class="form-control" id="size">
+                </div>
+                <div class="form-group col">
+                    <label for="min">Minimum Value</label>
+                    <input type="number" @bind="Minimum" class="form-control" id="min">
+                </div>
+                <div class="form-group col">
+                    <label for="max">Maximum Value</label>
+                    <input type="number" @bind="Maximum" class="form-control" id="max">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" @bind="UniqueNumbers" type="checkbox" id="uniqueNumbers">
+                        <label class="form-check-label" for="uniqueNumbers">
+                            Unique Numbers Inside of a Combination
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" @bind="UniqueCombinations" type="checkbox" id="uniqueCombinations">
+                        <label class="form-check-label" for="uniqueCombinations">
+                            Unique Combinations
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="count">Count of Combinations to Generate</label>
+                    <input type="number" min="1" @bind="Count" class="form-control" id="count">
+                </div>
+            </div>
+            <div class="form-row">
+                <button type="button" @onclick="Generate" class="btn btn-primary">Generate</button>
+            </div>
+        </form>
+        @if (GeneratedCombinations.Any())
+        {
+            <div class="container ml-auto mr-auto">
+                <h4>Output</h4>
+                <textarea rows="@GeneratedCombinations.Count"
+                          @bind="CombinationsString"
+                          readonly />
+            </div>
+        }
+    </div>
+
+@code {
+    public int Size = 4;
+    public int Count = 10;
+    public int Minimum = 0;
+    public int Maximum = 10;
+    public bool UniqueCombinations = true;
+    public bool UniqueNumbers = true;
+    public IList<NumberCombination> GeneratedCombinations = new List<NumberCombination>();
+    public string CombinationsString = "";
+
+    public void Generate()
+    {
+        try
+        {
+            GeneratedCombinations = NumberGenerator.GenerateNumberCombination(Minimum, Maximum, Size, Count, UniqueNumbers, UniqueCombinations);
+            CombinationsString = CreateCombinationString(GeneratedCombinations);
+            StateHasChanged();
+        }
+        catch(Exception ex)
+        {
+
+        }
+    }
+
+    private string CreateCombinationString(IList<NumberCombination> combinations)
+    {
+        var str = "";
+        for(var i = 0; i < combinations.Count; i++)
+        {
+            for(var j = 0; j < combinations[i].Numbers.Count; j++)
+            {
+                str += combinations[i].Numbers[j];
+                if(combinations[i].Numbers.Count > j+1)
+                {
+                    str += ",";
+                }
+            }
+            str += "\n";
+        }
+        return str;
+    }
+}
