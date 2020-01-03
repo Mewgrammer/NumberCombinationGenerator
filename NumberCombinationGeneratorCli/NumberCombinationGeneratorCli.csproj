@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NumberCombinationGenerator\NumberCombinationGenerator.csproj" />
     <ProjectReference Include="..\NumberGenerator\NumberGenerator.csproj" />
   </ItemGroup>
 
