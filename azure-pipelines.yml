@@ -12,14 +12,21 @@ steps:
     version: '3.1.x'
 
 - task: DotNetCoreCLI@2
-  displayName: Publish App
+  displayName: Publish CLI
   inputs:
-    command: publish
-    zipAfterPublish: true
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    command: 'publish'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/CLI'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGeneratorCli'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish Blazor App
+  inputs:
+    command: 'publish'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/WebApp'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGenerator'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifacts'
   inputs:
-    pathtoPublish: $(Build.ArtifactStagingDirectory)/Client
-    artifactName: 'Dist'
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: 'drop'
