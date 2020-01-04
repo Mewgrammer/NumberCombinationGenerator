@@ -1,4 +1,6 @@
 # Number Combination Generator
+
+This is a small .NetCore 3.1 App for generating number combinations.
  
 ## CLI
 The Number Combination Generator offers a CLI.
@@ -20,6 +22,15 @@ The Console will display the generated combinations.
 
 ## Web App
 The Number Combination Generator offers a Blazor Web App.
+Use the Form to edit parameters and press the "Generate"-Button to receive a list of generated values inside a textarea.
+
+![Screenshot](https://github.com/Mewgrammer/NumberCombinationGenerator/blob/master/doc/WebApp.png)
 
 
+## License
 
+BlazingComponents is licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php)
+
+
+## Credits
+CLI uses the awesome [Command Line Parser](https://github.com/commandlineparser/commandline)
