@@ -11,13 +11,11 @@ steps:
     packageType: 'sdk'
     version: '3.1.x'
 
-- task: DotNetCoreCLI@2
-  displayName: Publish CLI
-  inputs:
-    command: 'publish'
-    zipAfterPublish: false
-    arguments: '--self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/CLI'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGeneratorCli'
+
+- script: |
+    dotnet publish NumberCombinationGeneratorCli.csproj --self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/CLI
+  workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGeneratorCli'
+  displayName: 'Publish CLI'
 
 - task: ArchiveFiles@2
   inputs:
@@ -27,13 +25,10 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/CLI.zip'
     replaceExistingArchive: true
 
-- task: DotNetCoreCLI@2
-  displayName: Publish Blazor App
-  inputs:
-    command: 'publish'
-    zipAfterPublish: false
-    arguments: '--self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/WebApp'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGenerator'
+- script: |
+    dotnet publish NumberCombinationGenerator.csproj --self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/WebApp
+  workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGenerator'
+  displayName: 'Publish WebApp'
     
 - task: ArchiveFiles@2
   inputs:
