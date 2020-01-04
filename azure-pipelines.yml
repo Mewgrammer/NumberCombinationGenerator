@@ -15,15 +15,33 @@ steps:
   displayName: Publish CLI
   inputs:
     command: 'publish'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/CLI'
+    zipAfterPublish: false
+    arguments: '--self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/CLI'
     workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGeneratorCli'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)/CLI'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/CLI.zip'
+    replaceExistingArchive: true
 
 - task: DotNetCoreCLI@2
   displayName: Publish Blazor App
   inputs:
     command: 'publish'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/WebApp'
+    zipAfterPublish: false
+    arguments: '--self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/WebApp'
     workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGenerator'
+    
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)/WebApp'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/WebApp.zip'
+    replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifacts'
