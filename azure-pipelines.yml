@@ -16,7 +16,7 @@ steps:
   inputs:
     command: 'publish'
     zipAfterPublish: false
-    arguments: 'NumberCombinationGeneratorCli.csproj --self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/CLI'
+    arguments: '--self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/CLI'
     workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGeneratorCli'
 
 - task: ArchiveFiles@2
@@ -32,7 +32,7 @@ steps:
   inputs:
     command: 'publish'
     zipAfterPublish: false
-    arguments: 'NumberCombinationGenerator.csproj --self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/WebApp'
+    arguments: '--self-contained --runtime win-x86 --configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/WebApp'
     workingDirectory: '$(System.DefaultWorkingDirectory)/NumberCombinationGenerator'
     
 - task: ArchiveFiles@2
