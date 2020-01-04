@@ -22,9 +22,13 @@ The Console will display the generated combinations.
 
 ## Web App
 The Number Combination Generator offers a Blazor Web App.
-Use the Form to edit parameters and press the "Generate"-Button to receive a list of generated values inside a textarea.
 
 ![Screenshot](https://github.com/Mewgrammer/NumberCombinationGenerator/blob/master/doc/WebApp.png)
+
+### Usage
+Run the NumberCombinationGenerator.exe, then start your browser and go to http://localhost:5000 or https://localhost:5001.
+Use the Form to edit parameters and press the "Generate"-Button to receive a list of generated values inside a textarea.
+
 
 
 ## License
