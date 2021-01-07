@@ -1,12 +1,13 @@
 ﻿using CommandLine;
 using NumberGenerator;
 using System;
+using System.Linq;
 
 namespace NumberCombinationGeneratorCli
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var factory = new NumberCombinationFactory();
             var size = 0;
@@ -16,7 +17,7 @@ namespace NumberCombinationGeneratorCli
             var uniqueNumbers = true;
             var uniqueCombinations = true;
             Parser.Default.ParseArguments<CliOptions>(args)
-               .WithParsed<CliOptions>(o =>
+               .WithParsed(o =>
                {
                    size = o.Size;
                    count = o.Count;
@@ -31,7 +32,7 @@ namespace NumberCombinationGeneratorCli
                 var str = "";
                 for (var j = 0; j < comb.Numbers.Count; j++)
                 {
-                    str += comb.Numbers[j];
+                    str += comb.Numbers.ElementAt(j);
                     if (comb.Numbers.Count > j + 1)
                     {
                         str += ",";

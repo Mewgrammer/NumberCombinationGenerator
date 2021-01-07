@@ -15,7 +15,7 @@ namespace NumberCombinationGeneratorCli
         public int Max { get; set; }
         [Option('c', "count", Required = false, Default = 10, HelpText = "number of combinations to generate.")]
         public int Count { get; set; }
-        [Option("dc", Required = false, Default = false, HelpText = "allow dupilicate combinations.")]
+        [Option("dc", Required = false, Default = false, HelpText = "allow dupliicate combinations.")]
         public bool AllowDuplicateCombinations { get; set; }
         [Option("dn", Required = false, Default = false, HelpText = "allow duplicate numbers inside combinations.")]
         public bool AllowDuplicateNumbers { get; set; }

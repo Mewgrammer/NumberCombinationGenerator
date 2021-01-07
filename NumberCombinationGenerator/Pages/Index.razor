@@ -55,16 +55,16 @@
     </div>
 
 @code {
-    public int Size = 4;
-    public int Count = 10;
-    public int Minimum = 0;
-    public int Maximum = 20;
-    public bool UniqueCombinations = true;
-    public bool UniqueNumbers = true;
-    public IList<NumberCombination> GeneratedCombinations = new List<NumberCombination>();
-    public string CombinationsString = "";
+    protected int Size = 4;
+    protected int Count = 10;
+    protected int Minimum = 0;
+    protected int Maximum = 20;
+    protected bool UniqueCombinations = true;
+    protected bool UniqueNumbers = true;
+    protected IReadOnlyCollection<NumberCombination> GeneratedCombinations = new List<NumberCombination>();
+    protected string CombinationsString = "";
 
-    public void Generate()
+    protected void Generate()
     {
         try
         {
@@ -78,15 +78,15 @@
         }
     }
 
-    private string CreateCombinationString(IList<NumberCombination> combinations)
+    private string CreateCombinationString(IReadOnlyCollection<NumberCombination> combinations)
     {
         var str = "";
         for(var i = 0; i < combinations.Count; i++)
         {
-            for(var j = 0; j < combinations[i].Numbers.Count; j++)
+            for(var j = 0; j < combinations.ElementAt(i).Numbers.Count; j++)
             {
-                str += combinations[i].Numbers[j];
-                if(combinations[i].Numbers.Count > j+1)
+                str += combinations.ElementAt(i).Numbers.ElementAt(j);
+                if(combinations.ElementAt(i).Numbers.Count > j+1)
                 {
                     str += ",";
                 }

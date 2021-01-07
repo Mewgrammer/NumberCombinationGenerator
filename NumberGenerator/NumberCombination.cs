@@ -6,7 +6,7 @@ namespace NumberGenerator
 {
     public class NumberCombination : IEqualityComparer<NumberCombination>
     {
-        public IList<int> Numbers { get; set; }
+        public IReadOnlyCollection<int> Numbers { get; set; }
 
         public NumberCombination(IEnumerable<int> numbers)
         {
@@ -25,7 +25,7 @@ namespace NumberGenerator
 
         public bool Equals(NumberCombination x, NumberCombination y)
         {
-            return x.Numbers.SequenceEqual(y.Numbers);
+            return x == null && y == null || y != null && x != null && x.Numbers.SequenceEqual(y.Numbers);
         }
 
         public int GetHashCode(NumberCombination obj) => (Numbers).GetHashCode(); 
